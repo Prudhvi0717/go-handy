@@ -14,13 +14,13 @@ type Queue[T any] struct {
 
 // Deque removes and returns an element from the start of the queue
 // or an error if empty
-func (q *Queue[T]) Deque() (*T, error) {
+func (q *Queue[T]) Deque() (item T, err error) {
 	if q.Size() > 0 {
-		item := q.collection[0]
+		item = q.collection[0]
 		q.collection = q.collection[1:]
-		return &item, nil
+		return item, nil
 	}
-	return nil, ErrQueueEmpty
+	return item, ErrQueueEmpty
 }
 
 // Enqueue adds an element at the end of the queue
