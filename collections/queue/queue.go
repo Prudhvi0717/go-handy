@@ -12,7 +12,7 @@ type Queue[T any] struct {
 	collection []T
 }
 
-// Deque removes and returns an element from the start of the queue
+// Deque removes and returns the top element of the queue
 // or an error if empty
 func (q *Queue[T]) Deque() (item T, err error) {
 	if q.Size() > 0 {
@@ -26,6 +26,14 @@ func (q *Queue[T]) Deque() (item T, err error) {
 // Enqueue adds an element at the end of the queue
 func (q *Queue[T]) Enqueue(item T) {
 	q.collection = append(q.collection, item)
+}
+
+// Peek returns the top element of the queue or an error if empty
+func (q *Queue[T]) Peek() (item T, err error) {
+	if q.Size() > 0 {
+		return q.collection[0], nil
+	}
+	return item, ErrQueueEmpty
 }
 
 // Size returns the size of the queue
